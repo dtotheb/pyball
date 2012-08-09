@@ -20,6 +20,21 @@ def load_image(name, colorkey=None):
     return image, image.get_rect()
 
 
+def load_sound(name):
+    class NoneSound:
+        def play(self):
+            pass
+    if not pygame.mixer:
+        return NoneSound()
+    fullname = os.path.join('data', name)
+    try:
+        sound = pygame.mixer.Sound(fullname)
+    except pygame.error, message:
+        print 'Cannot load sound:', wav
+        raise SystemExit, message
+    return sound
+
+
 #generate a random vector within n
 def randomVector(n):
     x = random.randint(-1 * n, n)
@@ -32,6 +47,7 @@ class Ball(pygame.sprite.DirtySprite):
         pygame.sprite.DirtySprite.__init__(self)
         self.image, self.rect = load_image('ball.bmp')
         self.vector = (0, 0)
+        self.bounce_sound = load_sound('whiff.wav')
 
     def update(self):
         self.dirty = 1
@@ -47,9 +63,12 @@ class Ball(pygame.sprite.DirtySprite):
         #check for bounds
         if x + hx >= maxwidth or x - hx <= 0:
             self.vector = (self.vector[0] * -1, self.vector[1])
+            self.bounce_sound.play()
         if y + hy >= maxheight or y - hy <= 0:
             self.vector = (self.vector[0], self.vector[1] * -1)
+            self.bounce_sound.play()
 
     #handle ball clicks
     def clicked(self):
         self.vector = randomVector(2)
+        self.bounce_sound.play()
