@@ -24,6 +24,8 @@ class Ball(pygame.sprite.DirtySprite):
     def __init__(self):
         pygame.sprite.DirtySprite.__init__(self)
         self.image, self.rect = load_image('ball.bmp')
+        self.vector = (1, 1)
 
     def update(self):
         self.dirty = 1
+        self.rect.move_ip(self.vector)

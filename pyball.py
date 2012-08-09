@@ -37,3 +37,8 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+
+    allsprites.update()
+    screen.blit(background, (0, 0))
+    allsprites.draw(screen)
+    pygame.display.flip()
