@@ -3,7 +3,7 @@ import sys, os
 import random
 import pygame
 from pygame.locals import *
-
+from ball import Ball
 
 #setup pygame
 pygame.init()
@@ -20,6 +20,14 @@ background.fill((250, 250, 250))
 #Draw Everything
 screen.blit(background, (0, 0))
 pygame.display.flip()
+
+
+ball = Ball()
+ball.rect.center = (250, 250)
+
+allsprites = pygame.sprite.LayeredDirty((ball))
+rects = allsprites.draw(screen)
+pygame.display.update(rects)
 clock = pygame.time.Clock()
 
 while True:
