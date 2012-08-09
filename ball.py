@@ -24,8 +24,23 @@ class Ball(pygame.sprite.DirtySprite):
     def __init__(self):
         pygame.sprite.DirtySprite.__init__(self)
         self.image, self.rect = load_image('ball.bmp')
-        self.vector = (1, 1)
+        self.vector = (0, 0)
 
     def update(self):
         self.dirty = 1
         self.rect.move_ip(self.vector)
+
+    #checks if the ball bounces off the screen edge
+    def check_bounce(self, maxwidth, maxheight):
+        hx = self.rect.width / 2
+        hy = self.rect.height / 2
+        x = self.rect.centerx
+        y = self.rect.centery
+
+        #check for bounds
+        if x + hx >= maxwidth or x - hx <= 0:
+            self.vector = (self.vector[0] * -1, self.vector[1])
+        if y + hy >= maxheight or y - hy <= 0:
+            self.vector = (self.vector[0], self.vector[1] * -1)
+
+
