@@ -35,6 +35,7 @@ allsprites = pygame.sprite.LayeredDirty((ball))
 rects = allsprites.draw(screen)
 pygame.display.update(rects)
 clock = pygame.time.Clock()
+pygame.mouse.set_visible(True)
 
 #run the game loop
 while True:
@@ -44,6 +45,11 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        #check if the ball is clicked on
+        elif event.type == MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
+            if ball.rect.collidepoint(pos):
+                ball.clicked()
 
     allsprites.update()
     ball.check_bounce(screenwidth, screenheight)

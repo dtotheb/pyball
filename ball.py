@@ -20,6 +20,13 @@ def load_image(name, colorkey=None):
     return image, image.get_rect()
 
 
+#generate a random vector within n
+def randomVector(n):
+    x = random.randint(-1 * n, n)
+    y = random.randint(-1 * n, n)
+    return (x, y)
+
+
 class Ball(pygame.sprite.DirtySprite):
     def __init__(self):
         pygame.sprite.DirtySprite.__init__(self)
@@ -43,4 +50,6 @@ class Ball(pygame.sprite.DirtySprite):
         if y + hy >= maxheight or y - hy <= 0:
             self.vector = (self.vector[0], self.vector[1] * -1)
 
-
+    #handle ball clicks
+    def clicked(self):
+        self.vector = randomVector(2)
