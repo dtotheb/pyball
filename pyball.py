@@ -1,8 +1,8 @@
 #!/usr/bin/python
-import sys, os
-import random
+import sys
 import pygame
 from pygame.locals import *
+from helpers import *
 from ball import Ball
 
 #setup pygame
@@ -24,11 +24,6 @@ background.fill((250, 250, 250))
 screen.blit(background, (0, 0))
 pygame.display.flip()
 
-#generate a random vector within n
-def randomVector(n):
-    x = random.randint(-1 * n, n)
-    y = random.randint(-1 * n, n)
-    return (x, y)
 
 #create a new Ball
 def newBall(pos):
