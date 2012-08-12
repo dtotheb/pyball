@@ -63,12 +63,12 @@ class Ball(pygame.sprite.DirtySprite):
         #check for bounds
         if x + hx >= maxwidth or x - hx <= 0:
             self.vector = (self.vector[0] * -1, self.vector[1])
-            self.bounce_sound.play()
+            #self.bounce_sound.play()
         if y + hy >= maxheight or y - hy <= 0:
             self.vector = (self.vector[0], self.vector[1] * -1)
-            self.bounce_sound.play()
+            #self.bounce_sound.play()
 
     #handle ball clicks
     def clicked(self):
         self.vector = randomVector(2)
-        self.bounce_sound.play()
+        #self.bounce_sound.play()
