@@ -31,16 +31,16 @@ def randomVector(n):
     return (x, y)
 
 #create a new Ball
-def newBall():
+def newBall(pos):
     ball = Ball(MAXWIDTH, MAXHEIGHT)
-    ball.rect.center = (MAXWIDTH / 2, MAXHEIGHT / 2)
+    ball.rect.center = pos
     ball.vector = randomVector(2)
     return ball
 
 #create some balls
 allsprites = pygame.sprite.LayeredDirty()
 for n in range(0, 5):
-    ball = newBall()
+    ball = newBall((MAXWIDTH / 2, MAXHEIGHT / 2))
     allsprites.add(ball)
 
 #setup the sprites/clock
@@ -60,8 +60,8 @@ while True:
         #check if the ball is clicked on
         elif event.type == MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            if ball.rect.collidepoint(pos):
-                ball.clicked()
+            ball = newBall(pos)
+            allsprites.add(ball)
 
     allsprites.update()
     screen.blit(background, (0, 0))
