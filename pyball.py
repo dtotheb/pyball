@@ -24,14 +24,26 @@ background.fill((250, 250, 250))
 screen.blit(background, (0, 0))
 pygame.display.flip()
 
+#generate a random vector within n
+def randomVector(n):
+    x = random.randint(-1 * n, n)
+    y = random.randint(-1 * n, n)
+    return (x, y)
 
-#setup the Ball
-ball = Ball()
-ball.rect.center = (MAXWIDTH / 2, MAXHEIGHT / 2)
-ball.vector = (-1, -1)
+#create a new Ball
+def newBall():
+    ball = Ball(MAXWIDTH, MAXHEIGHT)
+    ball.rect.center = (MAXWIDTH / 2, MAXHEIGHT / 2)
+    ball.vector = randomVector(2)
+    return ball
+
+#create some balls
+allsprites = pygame.sprite.LayeredDirty()
+for n in range(0, 5):
+    ball = newBall()
+    allsprites.add(ball)
 
 #setup the sprites/clock
-allsprites = pygame.sprite.LayeredDirty((ball))
 rects = allsprites.draw(screen)
 pygame.display.update(rects)
 clock = pygame.time.Clock()
@@ -52,7 +64,6 @@ while True:
                 ball.clicked()
 
     allsprites.update()
-    ball.check_bounce(MAXWIDTH, MAXHEIGHT)
     screen.blit(background, (0, 0))
     allsprites.draw(screen)
     pygame.display.flip()
