@@ -45,7 +45,7 @@ def randomVector(n):
 class Ball(pygame.sprite.DirtySprite):
     def __init__(self, maxwidth, maxheight):
         pygame.sprite.DirtySprite.__init__(self)
-        self.image, self.rect = load_image('ball.bmp')
+        self.image, self.rect = load_image('blue_ball.bmp')
         self.vector = (0, 0)
         self.bounce_sound = load_sound('whiff.wav')
         self.maxwidth = maxwidth

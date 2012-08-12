@@ -34,7 +34,7 @@ def randomVector(n):
 def newBall(pos):
     ball = Ball(MAXWIDTH, MAXHEIGHT)
     ball.rect.center = pos
-    ball.vector = randomVector(2)
+    ball.vector = randomVector(5)
     return ball
 
 #create some balls
