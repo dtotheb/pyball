@@ -9,7 +9,9 @@ from ball import Ball
 pygame.init()
 
 #setup the window
-screen = pygame.display.set_mode((500, 500), 0, 32)
+MAXWIDTH = 500
+MAXHEIGHT = 500
+screen = pygame.display.set_mode((MAXWIDTH, MAXHEIGHT), 0, 32)
 pygame.display.set_caption('Py ball')
 pygame.mouse.set_visible(0)
 
@@ -22,12 +24,10 @@ background.fill((250, 250, 250))
 screen.blit(background, (0, 0))
 pygame.display.flip()
 
-screenwidth = screen.get_width()
-screenheight = screen.get_height()
 
 #setup the Ball
 ball = Ball()
-ball.rect.center = (250, 250)
+ball.rect.center = (MAXWIDTH / 2, MAXHEIGHT / 2)
 ball.vector = (-1, -1)
 
 #setup the sprites/clock
@@ -52,7 +52,7 @@ while True:
                 ball.clicked()
 
     allsprites.update()
-    ball.check_bounce(screenwidth, screenheight)
+    ball.check_bounce(MAXWIDTH, MAXHEIGHT)
     screen.blit(background, (0, 0))
     allsprites.draw(screen)
     pygame.display.flip()
